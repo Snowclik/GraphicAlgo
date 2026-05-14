@@ -1,0 +1,32 @@
+# GraphicAlgo - Rasterization Algorithm Visualizer
+
+GraphicAlgo is an educational tool designed to visualize the step-by-step logic of computer graphics rasterization algorithms. Built with React and TypeScript, it focuses on clarity, performance, and modern aesthetics (Duolingo-inspired).
+
+## Key Features
+- **Algorithm Visualization**: Interactive step-by-step rendering of Bresenham and Midpoint algorithms for lines and circles.
+- **Dynamic Viewport**: A pixel grid that automatically adjusts its bounds to fit the current coordinates, ensuring optimal visibility.
+- **Floating Coordinates**: Dynamic X and Y axis labels that align with the grid cells, moving as the viewport adapts.
+- **Export Capabilities**: Integration with Excel for exporting algorithm step data for further analysis.
+- **Performance**: High-frequency updates handled via React state and Framer Motion for smooth transitions.
+
+## Supported Algorithms
+1. **Line Drawing**:
+   - Bresenham Line Algorithm (optimized for integer arithmetic).
+   - DDA (Digital Differential Analyzer).
+2. **Circle Generation**:
+   - Midpoint Circle Algorithm (Bresenham-based).
+3. **Ellipses**:
+   - Midpoint Ellipse Algorithm.
+
+## Technology Stack
+- **Frontend**: React 18, Vite.
+- **Styling**: Tailwind CSS (with custom design tokens in index.css).
+- **Animations**: Framer Motion.
+- **Deployment**: Vercel ready.
+
+## Project Structure
+- `/src/algorithms`: Core mathematical implementations.
+- `/src/components`: UI components (PixelGrid, InputForm, StepTable, etc.).
+- `/src/hooks`: Custom logic for algorithm state management.
+
+Developed by Snowclik (2026).
