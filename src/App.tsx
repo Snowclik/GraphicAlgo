@@ -39,7 +39,7 @@ function App() {
 
           <div className="flex items-center gap-4">
             <a 
-              href="https://github.com" 
+              href="https://github.com/Snowclik/GraphicAlgo" 
               target="_blank" 
               className="p-2 border-2 border-cloud-gray rounded-xl transition-all hover:bg-cloud-gray text-silver hover:text-charcoal active:translate-y-1"
             >

@@ -77,7 +77,6 @@ export function useAlgorithm() {
       algorithm,
       lastParams,
       visibleSteps,   // ✅ Solo lo que está visible en pantalla
-      litPixels,
       gridSize,
       'pixel-grid-container'
     );

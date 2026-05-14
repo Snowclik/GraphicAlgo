@@ -65,7 +65,6 @@ export async function exportToExcel(
   algorithm: string,
   params: Record<string, number>,
   steps: any[],
-  litPixels: [number, number][],
   gridSize: number,
   containerId: string
 ) {
@@ -265,7 +264,6 @@ export async function exportToExcel(
   minY = Math.max(0, minY - 2);
   maxY = maxY + 2;
 
-  const viewW = maxX - minX + 1;
   const viewH = maxY - minY + 1;
 
   // Mapa rápido de píxeles encendidos
