@@ -1,73 +1,42 @@
-# React + TypeScript + Vite
+# GraphicAlgo 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Visualizador interactivo de algoritmos de rasterización (Bresenham, Punto Medio) para líneas, círculos y elipses. Diseñado con una estética moderna y optimizado para educación, análisis de datos e indexación por IA.
 
-Currently, two official plugins are available:
+## ✨ Características
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Visualización en Vivo**: Observa paso a paso cómo se calculan y posicionan los píxeles en la cuadrícula.
+- **Cuadrícula Dinámica**: El visor se ajusta automáticamente a las coordenadas introducidas, manteniendo siempre píxeles cuadrados (1x1).
+- **Coordenadas Flotantes**: Etiquetas dinámicas en los ejes X e Y que se sincronizan con la cuadrícula.
+- **Múltiples Algoritmos**:
+  - **Líneas**: Bresenham y DDA.
+  - **Círculos**: Algoritmo de Punto Medio.
+  - **Elipses**: Algoritmo de Punto Medio.
+- **Exportación**: Genera reportes detallados en formato Excel con todos los pasos matemáticos.
+- **Responsivo**: Adaptado para una experiencia fluida tanto en PC como en móviles.
 
-## React Compiler
+## 🛠️ Tecnologías
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React 18** + **TypeScript**
+- **Vite** (Build Tool)
+- **Tailwind CSS** (Estilos)
+- **Framer Motion** (Animaciones)
+- **Lucide React** (Iconos)
 
-## Expanding the ESLint configuration
+## 🚀 Instalación y Uso
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Instala las dependencias:
+   ```bash
+   npm install
+   ```
+2. Inicia el servidor de desarrollo:
+   ```bash
+   npm run dev
+   ```
+3. Construye para producción:
+   ```bash
+   npm run build
+   ```
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📄 Licencia
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+© 2026 Snowclik. Proyecto educativo para visualización de algoritmos gráficos.
