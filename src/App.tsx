@@ -90,6 +90,7 @@ function App() {
               currentIndex={currentIndex} 
               onExport={exportToExcel}
               allStepsCount={allSteps.length}
+              algorithm={algorithm}
             />
           </div>
 

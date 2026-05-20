@@ -120,10 +120,13 @@ export async function exportToExcel(
   // ── 2. Hoja REGISTRO MATEMÁTICO (fiel a la UI) ───────────────────────────────
   const buildMathSheet = (ws: ExcelJS.Worksheet, sheetSteps: any[], title: string, sheetParams: Record<string, number>) => {
     const isDDA = sheetSteps.length > 0 && 'xReal' in sheetSteps[0];
+    const isBresenham = algorithm === 'bresenham';
 
     // Nombre de la hoja ya se pone al crear. Aquí solo el encabezado interno.
     let headers: string[];
-    if (isEllipse) {
+    if (isBresenham) {
+      headers = ['K', 'X', 'Y', 'P', 'Puntos', 'Fórmula'];
+    } else if (isEllipse) {
       headers = ['K', 'PK', '(X, Y)', '2ry²x', '2rx²y', 'Fórmula'];
     } else if (isDDA) {
       headers = ['Paso', 'X real', 'Y real', 'Punto', 'Fórmula'];
@@ -132,7 +135,16 @@ export async function exportToExcel(
     }
 
     let columns: any[] = [];
-    if (isDDA) {
+    if (isBresenham) {
+      columns = [
+        { key: 'k',       width: 10 },
+        { key: 'x',       width: 10 },
+        { key: 'y',       width: 10 },
+        { key: 'p',       width: 10 },
+        { key: 'xy',      width: 14 },
+        { key: 'formula', width: 80 },
+      ];
+    } else if (isDDA) {
       columns = [
         { key: 'step', width: 8 },
         { key: 'xr',   width: 12 },
@@ -187,7 +199,18 @@ export async function exportToExcel(
       let rowData: any[];
       let isNegative = false;
       
-      if (isDDA) {
+      if (isBresenham) {
+        const pk = getPk(step);
+        isNegative = pk < 0;
+        rowData = [
+          step.step,
+          step.x,
+          step.y,
+          pk,
+          `(${px}, ${py})`,
+          step.formula ?? ''
+        ];
+      } else if (isDDA) {
         rowData = [
           step.step,
           step.xReal.toFixed(2),

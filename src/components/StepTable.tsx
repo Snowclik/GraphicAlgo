@@ -8,9 +8,11 @@ interface StepTableProps {
   currentIndex: number;
   onExport: () => void;
   allStepsCount: number;
+  algorithm: string;
 }
 
-const StepTable: React.FC<StepTableProps> = ({ steps, currentIndex, onExport, allStepsCount }) => {
+const StepTable: React.FC<StepTableProps> = ({ steps, currentIndex, onExport, allStepsCount, algorithm }) => {
+  const isBresenham = algorithm === 'bresenham';
   const isEllipse = steps.length > 0 && 'region' in steps[0];
   const isDDA = steps.length > 0 && 'xReal' in steps[0];
   
@@ -24,23 +26,35 @@ const StepTable: React.FC<StepTableProps> = ({ steps, currentIndex, onExport, al
         <table className="w-full text-left border-collapse min-w-[400px]">
           <thead>
             <tr className="border-b-2 border-cloud-gray text-caption font-bold text-silver uppercase tracking-wider">
-              <th className="py-3 px-4">Paso</th>
-              {isDDA ? (
+              {isBresenham ? (
                 <>
-                  <th className="py-3 px-4">X real</th>
-                  <th className="py-3 px-4">Y real</th>
-                  <th className="py-3 px-4">Punto</th>
+                  <th className="py-3 px-4">k</th>
+                  <th className="py-3 px-4">x</th>
+                  <th className="py-3 px-4">y</th>
+                  <th className="py-3 px-4">p</th>
+                  <th className="py-3 px-4">Puntos</th>
                 </>
               ) : (
                 <>
-                  <th className="py-3 px-4">pk</th>
-                  <th className="py-3 px-4">(x, y)</th>
-                </>
-              )}
-              {isEllipse && (
-                <>
-                  <th className="py-3 px-4">2ry²x</th>
-                  <th className="py-3 px-4">2rx²y</th>
+                  <th className="py-3 px-4">Paso</th>
+                  {isDDA ? (
+                    <>
+                      <th className="py-3 px-4">X real</th>
+                      <th className="py-3 px-4">Y real</th>
+                      <th className="py-3 px-4">Punto</th>
+                    </>
+                  ) : (
+                    <>
+                      <th className="py-3 px-4">pk</th>
+                      <th className="py-3 px-4">(x, y)</th>
+                    </>
+                  )}
+                  {isEllipse && (
+                    <>
+                      <th className="py-3 px-4">2ry²x</th>
+                      <th className="py-3 px-4">2rx²y</th>
+                    </>
+                  )}
                 </>
               )}
               <th className="py-3 px-4 hidden lg:table-cell">Fórmula</th>
@@ -81,23 +95,35 @@ const StepTable: React.FC<StepTableProps> = ({ steps, currentIndex, onExport, al
                       ${bgColorClass} hover:brightness-95
                     `}
                   >
-                    <td className="py-4 px-4 text-body font-bold text-charcoal">{step.step}</td>
-                    {isDDA ? (
+                    {isBresenham ? (
                       <>
-                        <td className="py-4 px-4 text-body font-bold text-charcoal">{(step as any).xReal.toFixed(2)}</td>
-                        <td className="py-4 px-4 text-body font-bold text-charcoal">{(step as any).yReal.toFixed(2)}</td>
+                        <td className="py-4 px-4 text-body font-bold text-charcoal">{step.step}</td>
+                        <td className="py-4 px-4 text-body font-bold text-charcoal">{pointX}</td>
+                        <td className="py-4 px-4 text-body font-bold text-charcoal">{pointY}</td>
+                        <td className="py-4 px-4 text-body font-bold text-charcoal">{pkValue}</td>
                         <td className="py-4 px-4 text-body font-bold text-charcoal">({pointX}, {pointY})</td>
                       </>
                     ) : (
                       <>
-                        <td className="py-4 px-4 text-body font-bold text-charcoal">{pkValue}</td>
-                        <td className="py-4 px-4 text-body font-bold text-charcoal">({pointX}, {pointY})</td>
-                      </>
-                    )}
-                    {isEllipse && (
-                      <>
-                        <td className="py-4 px-4 text-body font-bold text-graphite">{(step as any).term1}</td>
-                        <td className="py-4 px-4 text-body font-bold text-graphite">{(step as any).term2}</td>
+                        <td className="py-4 px-4 text-body font-bold text-charcoal">{step.step}</td>
+                        {isDDA ? (
+                          <>
+                            <td className="py-4 px-4 text-body font-bold text-charcoal">{(step as any).xReal.toFixed(2)}</td>
+                            <td className="py-4 px-4 text-body font-bold text-charcoal">{(step as any).yReal.toFixed(2)}</td>
+                            <td className="py-4 px-4 text-body font-bold text-charcoal">({pointX}, {pointY})</td>
+                          </>
+                        ) : (
+                          <>
+                            <td className="py-4 px-4 text-body font-bold text-charcoal">{pkValue}</td>
+                            <td className="py-4 px-4 text-body font-bold text-charcoal">({pointX}, {pointY})</td>
+                          </>
+                        )}
+                        {isEllipse && (
+                          <>
+                            <td className="py-4 px-4 text-body font-bold text-graphite">{(step as any).term1}</td>
+                            <td className="py-4 px-4 text-body font-bold text-graphite">{(step as any).term2}</td>
+                          </>
+                        )}
                       </>
                     )}
                     <td className="py-4 px-4 text-caption font-bold text-graphite italic hidden lg:table-cell">{step.formula}</td>

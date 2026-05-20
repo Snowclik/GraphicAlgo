@@ -57,14 +57,7 @@ export function runBresenham(x0: number, y0: number, x1: number, y1: number): Br
 
   while (x !== x1) {
     stepNum++;
-    if (d <= 0) {
-      const newD = d + dE;
-      const formula = `d = ${d} + dE(${dE}) = ${newD} → solo X avanza`;
-      x += sx;
-      d = newD;
-      const px: [number, number] = steep ? [y, x] : [x, y];
-      steps.push({ step: stepNum, x: steep ? y : x, y: steep ? x : y, d, decision: 'E', formula, point: px });
-    } else {
+    if (d >= 0) {
       const newD = d + dNE;
       const formula = `d = ${d} + dNE(${dNE}) = ${newD} → X e Y avanzan`;
       x += sx;
@@ -72,6 +65,13 @@ export function runBresenham(x0: number, y0: number, x1: number, y1: number): Br
       d = newD;
       const px: [number, number] = steep ? [y, x] : [x, y];
       steps.push({ step: stepNum, x: steep ? y : x, y: steep ? x : y, d, decision: 'NE', formula, point: px });
+    } else {
+      const newD = d + dE;
+      const formula = `d = ${d} + dE(${dE}) = ${newD} → solo X avanza`;
+      x += sx;
+      d = newD;
+      const px: [number, number] = steep ? [y, x] : [x, y];
+      steps.push({ step: stepNum, x: steep ? y : x, y: steep ? x : y, d, decision: 'E', formula, point: px });
     }
   }
 
