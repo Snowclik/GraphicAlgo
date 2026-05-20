@@ -127,6 +127,7 @@ export function useAlgorithm() {
     currentIndex, isComplete,
     isPlaying, speed, setSpeed,
     litPixels, gridSize,
-    runAlgorithm, nextStep, prevStep, reset, togglePlay, exportToExcel: exportToExcelAction
+    runAlgorithm, nextStep, prevStep, reset, togglePlay, exportToExcel: exportToExcelAction,
+    lastParams
   };
 }

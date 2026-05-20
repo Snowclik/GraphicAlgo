@@ -4,7 +4,7 @@ import InputForm from './components/InputForm';
 import PixelGrid from './components/PixelGrid';
 import StepTable from './components/StepTable';
 import Controls from './components/Controls';
-import { Github, Monitor, Layers } from 'lucide-react';
+import { Github, Layers } from 'lucide-react';
 
 function App() {
   const {
@@ -13,7 +13,8 @@ function App() {
     currentIndex, isComplete,
     isPlaying, speed, setSpeed,
     litPixels, gridSize,
-    runAlgorithm, nextStep, prevStep, reset, togglePlay, exportToExcel
+    runAlgorithm, nextStep, prevStep, reset, togglePlay, exportToExcel,
+    lastParams
   } = useAlgorithm();
 
   const currentStepData = allSteps[currentIndex];
@@ -48,21 +49,12 @@ function App() {
           </div>
         </header>
 
-        <main className="max-w-[1140px] mx-auto p-4 md:p-6 lg:p-10 grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6 md:gap-8">
+        <main className="max-w-[1440px] mx-auto p-4 md:p-6 lg:p-10 grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6 md:gap-8">
           
           {/* Left Column: Navigation & Settings */}
           <div className="flex flex-col gap-6">
             <Sidebar current={algorithm} onChange={(type) => { reset(); setAlgorithm(type); }} />
             <InputForm algorithm={algorithm} onRun={runAlgorithm} onModeChange={setAlgorithm} />
-            <div className="hidden lg:block p-6 rounded-xl bg-snow-white border-2 border-cloud-gray shadow-cloud-gray">
-              <div className="flex items-center gap-2 mb-3 text-sky-blue font-bold">
-                <Monitor size={18} />
-                <span className="text-caption font-bold uppercase tracking-wider">Sistema</span>
-              </div>
-              <p className="text-body text-graphite leading-relaxed">
-                Visualización de algoritmos de rasterización. La rejilla se ajusta dinámicamente al tamaño de tus coordenadas.
-              </p>
-            </div>
           </div>
 
           {/* Right Column: Visualizer & Steps */}
@@ -91,6 +83,7 @@ function App() {
               onExport={exportToExcel}
               allStepsCount={allSteps.length}
               algorithm={algorithm}
+              params={lastParams}
             />
           </div>
 
