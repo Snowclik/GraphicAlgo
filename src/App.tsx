@@ -18,14 +18,14 @@ function App() {
   } = useAlgorithm();
 
   const currentStepData = allSteps[currentIndex];
-  const currentPoint = currentStepData 
+  const currentPoint = currentStepData
     ? ('point' in currentStepData ? currentStepData.point : ('points' in currentStepData ? currentStepData.points[0] : undefined))
     : undefined;
 
   return (
     <div className="min-h-screen bg-snow-white text-almost-black font-sans selection:bg-duo-green-light">
       <div className="min-h-screen">
-        
+
         {/* Header */}
         <header className="h-20 border-b-2 border-cloud-gray flex items-center justify-between px-4 md:px-8 bg-snow-white sticky top-0 z-50">
           <div className="flex items-center gap-3">
@@ -39,9 +39,9 @@ function App() {
           </div>
 
           <div className="flex items-center gap-4">
-            <a 
-              href="https://github.com/Snowclik/GraphicAlgo" 
-              target="_blank" 
+            <a
+              href="https://github.com/Snowclik/GraphicAlgo"
+              target="_blank"
               className="p-2 border-2 border-cloud-gray rounded-xl transition-all hover:bg-cloud-gray text-silver hover:text-charcoal active:translate-y-1"
             >
               <Github size={20} />
@@ -50,7 +50,7 @@ function App() {
         </header>
 
         <main className="max-w-[1440px] mx-auto p-4 md:p-6 lg:p-10 grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6 md:gap-8">
-          
+
           {/* Left Column: Navigation & Settings */}
           <div className="flex flex-col gap-6">
             <Sidebar current={algorithm} onChange={(type) => { reset(); setAlgorithm(type); }} />
@@ -59,14 +59,14 @@ function App() {
 
           {/* Right Column: Visualizer & Steps */}
           <div className="flex flex-col gap-6 md:gap-8">
-            <PixelGrid 
-              litPixels={litPixels} 
-              currentPoint={currentPoint as [number, number]} 
+            <PixelGrid
+              litPixels={litPixels}
+              currentPoint={currentPoint as [number, number]}
               gridSize={gridSize}
               algorithm={algorithm}
             />
-            
-            <Controls 
+
+            <Controls
               isPlaying={isPlaying}
               onTogglePlay={togglePlay}
               onNext={nextStep}
@@ -77,9 +77,9 @@ function App() {
               isComplete={isComplete}
             />
 
-            <StepTable 
-              steps={visibleSteps} 
-              currentIndex={currentIndex} 
+            <StepTable
+              steps={visibleSteps}
+              currentIndex={currentIndex}
               onExport={exportToExcel}
               allStepsCount={allSteps.length}
               algorithm={algorithm}
